@@ -1,0 +1,11 @@
+body{font-family:system-ui,sans-serif;margin:0;background:#111;color:#eee}
+main{max-width:900px;margin:auto;padding:16px}
+header{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+#inventory{display:flex;gap:8px;flex-wrap:wrap}
+.badge{border:1px solid #555;padding:4px 8px;border-radius:8px}
+#scene img{max-width:100%;border-radius:8px}
+button{padding:8px 12px;border-radius:8px;border:1px solid #555;background:#222;color:#eee;cursor:pointer}
+button:disabled{opacity:.5;cursor:not-allowed}
+.actions{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin-top:12px}
+input[type="text"]{padding:6px 8px;border-radius:6px;border:1px solid #555;background:#1a1a1a;color:#eee}
+.warn{color:#f99}
