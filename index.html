@@ -3,19 +3,64 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mini Escape</title>
+  <title>Time Escape</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main id="app">
-    <header>
-      <h1>Mini Escape</h1>
-      <nav id="inventory"></nav>
-    </header>
+  <header class="topbar">
+    <h1>Time Escape</h1>
+    <div class="controls">
+      <div class="status" id="status">0/5 gelöst</div>
+      <button id="reset" class="ghost danger" title="Spielstand löschen">Zurücksetzen</button>
+    </div>
+  </header>
 
-    <section id="scene"></section>
-    <footer id="actions"></footer>
+  <main id="app">
+    <section id="start" class="view">
+      <article class="card">
+        <h2>Zeitreise – Einstieg</h2>
+        <p>Ein Störfall hat die Zeitmaschine durcheinandergebracht. Du landest in unterschiedlichen Epochen.
+           Löse Aufgaben aus den Fachgebieten der jeweiligen Persönlichkeit. Jede gelöste Aufgabe bringt dich näher in die Gegenwart.</p>
+        <ul class="bullets">
+          <li>Aktuell ist <strong>Mathematik (Antike)</strong> spielbar.</li>
+          <li>Weitere Epochen folgen (Platzhalter gekennzeichnet).</li>
+          <li>Fortschritt wird lokal gespeichert.</li>
+        </ul>
+        <button id="toMenu" class="primary">Start</button>
+      </article>
+    </section>
+
+    <section id="menu" class="view" hidden>
+      <h2>Epochen</h2>
+      <div class="grid" id="era-grid"></div>
+      <div class="actions"><button id="backToStart" class="link">← Zurück</button></div>
+    </section>
+
+    <section id="puzzle" class="view" hidden>
+      <div class="crumbs"><button id="backToMenu" class="link">← Epochen</button></div>
+      <article class="card">
+        <h3 id="puzzle-title"></h3>
+        <p id="puzzle-flavor" class="muted"></p>
+        <div id="puzzle-body"></div>
+        <div id="puzzle-result" class="notice"></div>
+      </article>
+    </section>
+
+    <section id="finale" class="view" hidden>
+      <article class="card success">
+        <h2>Gegenwart erreicht</h2>
+        <p>Die Zeitmaschine ist stabil. Gute Arbeit.</p>
+        <div class="actions">
+          <button id="again" class="primary">Epochen</button>
+          <button id="againStart" class="link">Start</button>
+        </div>
+      </article>
+    </section>
   </main>
+
+  <footer class="btm">
+    <small>HTML/CSS/JS</small>
+  </footer>
 
   <script defer src="game.js"></script>
 </body>
