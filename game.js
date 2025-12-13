@@ -273,7 +273,7 @@ function renderNewton(container, solved, fail) {
 
   const intro = document.createElement("p");
   intro.innerHTML = `
-    England, 1666. Isaac Newton analysiert eine beschleunigte Bewegung.
+    England, 1666. Isaac Newton analysiert eine beschleunigte Bewegung.<br>
     Newton fordert eine saubere Herleitung – logisch, präzise, überprüfbar.<br><br>
 
     <strong>Gegeben:</strong><br>
@@ -324,7 +324,7 @@ function renderCurie(container, solved, fail) {
 
   const intro = document.createElement("p");
   intro.innerHTML = `
-    Paris, 1898. Marie Curie untersucht einfache Molekülmodelle.
+    Paris, 1898. Marie Curie untersucht einfache Molekülmodelle.<br>
     Sie erwartet eine klare Zählung – sachlich, exakt, nachvollziehbar.<br><br>
 
     <strong>Gegeben:</strong><br>
@@ -374,7 +374,7 @@ function renderTuring(container, solved, fail) {
 
   const intro = document.createElement("p");
   intro.innerHTML = `
-    Großbritannien, 1943. Alan Turing denkt in klaren Abläufen.
+    Großbritannien, 1943. Alan Turing denkt in klaren Abläufen.<br>
     Jeder Schritt folgt einer festen Regel – ohne Interpretation.<br><br>
 
     <strong>Algorithmus:</strong><br>
@@ -422,7 +422,7 @@ function renderHopper(container, solved, fail) {
 
   const intro = document.createElement("p");
   intro.innerHTML = `
-    USA, 1952. Grace Hopper überprüft einen Programmablauf.
+    USA, 1952. Grace Hopper überprüft einen Programmablauf.<br>
     Sie achtet auf Reihenfolge – jeder Befehl zählt.<br><br>
 
     <strong>Code:</strong><br>
