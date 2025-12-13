@@ -224,8 +224,14 @@ function renderPythagoras(container, solved, fail) {
   const cRound = Math.round(cTrue * 10) / 10;
 
   const intro = document.createElement("p");
-  intro.innerHTML = `Antike Werkstatt, Wachstafel, rechtwinkliges Dreieck: a = <strong>${a}</strong>, b = <strong>${b}</strong>.<br><br><strong>Aufgabe:</strong> Berechne die Hypotenuse <em>c</em> und runde auf eine Nachkommastelle.`;
-
+  intro.innerHTML=`
+    <strong>Gegeben:</strong><br>
+    Antike Werkstatt, Wachstafel, rechtwinkliges Dreieck:
+    a = <strong>${a}</strong>, b = <strong>${b}</strong>.
+    Pythagoras will eine klare Rechnung – kurz, korrekt, überzeugend.<br><br>
+    <strong>Aufgabe:</strong>
+    Berechne die Hypotenuse <em>c</em> und runde auf eine Nachkommastelle.
+    `;
   const form = document.createElement("form");
   const label = document.createElement("label");
   label.textContent = "c =";
@@ -260,17 +266,28 @@ function renderPythagoras(container, solved, fail) {
 }
 
 function renderNewton(container, solved, fail) {
-  const m = 2;
-  const a = 3;
-  const fTrue = m * a;
+  const v0 = 2;   // m/s
+  const a = 4;    // m/s²
+  const t = 3;    // s
+  const vTrue = v0 + a * t;
 
   const intro = document.createElement("p");
-  intro.innerHTML = `England, 1666.<br><br><strong>Aufgabe:</strong> Berechne die Kraft F (F = m · a).`;
+  intro.innerHTML = `
+    England, 1666. Isaac Newton analysiert eine beschleunigte Bewegung.
+    Newton fordert eine saubere Herleitung – logisch, präzise, überprüfbar.<br><br>
+
+    <strong>Gegeben:</strong><br>
+    Anfangsgeschwindigkeit v₀ = ${v0} m/s<br>
+    Beschleunigung a = ${a} m/s²<br>
+    Zeit t = ${t} s<br><br>
+
+    <strong>Aufgabe:</strong>
+    Berechne die Endgeschwindigkeit v.
+  `;
 
   const form = document.createElement("form");
   const label = document.createElement("label");
-  label.textContent = "F =";
-
+  label.textContent = "v = (in m/s)";
   const input = document.createElement("input");
   input.type = "number";
   input.required = true;
@@ -285,23 +302,42 @@ function renderNewton(container, solved, fail) {
 
   form.addEventListener("submit", e => {
     e.preventDefault();
-    if (Number(input.value) === fTrue) {
-      container.insertAdjacentHTML("beforeend", `<div class="notice">Richtig.</div>`);
+    const val = Number(input.value);
+
+    if (val === vTrue) {
+      container.insertAdjacentHTML(
+        "beforeend",
+        `<div class="notice">Korrekt. v = ${vTrue} m/s.</div>`
+      );
       setTimeout(solved, 600);
     } else {
-      fail("Falsch. Nutze F = m · a.");
+      fail("Falsch. Nutze v = v₀ + a · t.");
     }
   });
 }
+
 
 function renderCurie(container, solved, fail) {
+  const molecules = 3;
+  const atomsPer = 3; // H2O = 3 Atome
+  const totalAtoms = molecules * atomsPer;
+
   const intro = document.createElement("p");
-  intro.innerHTML = `Paris, 1898.<br><br><strong>Aufgabe:</strong> Wie viele Wasserstoff-Atome hat H₂O?`;
+  intro.innerHTML = `
+    Paris, 1898. Marie Curie untersucht einfache Molekülmodelle.
+    Sie erwartet eine klare Zählung – sachlich, exakt, nachvollziehbar.<br><br>
+
+    <strong>Gegeben:</strong><br>
+    Ein Wassermolekül H₂O besteht aus 3 Atomen.<br>
+    Anzahl der Moleküle: ${molecules}<br><br>
+
+    <strong>Aufgabe:</strong>
+    Wie viele Atome sind es insgesamt?
+  `;
 
   const form = document.createElement("form");
   const label = document.createElement("label");
-  label.textContent = "Anzahl:";
-
+  label.textContent = "Anzahl Atome:";
   const input = document.createElement("input");
   input.type = "number";
   input.required = true;
@@ -316,23 +352,43 @@ function renderCurie(container, solved, fail) {
 
   form.addEventListener("submit", e => {
     e.preventDefault();
-    if (Number(input.value) === 2) {
-      container.insertAdjacentHTML("beforeend", `<div class="notice">Richtig.</div>`);
+    const val = Number(input.value);
+
+    if (val === totalAtoms) {
+      container.insertAdjacentHTML(
+        "beforeend",
+        `<div class="notice">Richtig. Insgesamt ${totalAtoms} Atome.</div>`
+      );
       setTimeout(solved, 600);
     } else {
-      fail("Nicht korrekt.");
+      fail("Nicht korrekt. Multipliziere Moleküle × Atome pro Molekül.");
     }
   });
 }
 
+
 function renderTuring(container, solved, fail) {
+  const start = 1;
+  const steps = 4;
+  const result = 9;
+
   const intro = document.createElement("p");
-  intro.innerHTML = `Startwert 2, dreimal verdoppeln.<br><br><strong>Endwert?</strong>`;
+  intro.innerHTML = `
+    Großbritannien, 1943. Alan Turing denkt in klaren Abläufen.
+    Jeder Schritt folgt einer festen Regel – ohne Interpretation.<br><br>
+
+    <strong>Algorithmus:</strong><br>
+    Startwert = ${start}<br>
+    Wiederhole ${steps}-mal:<br>
+    → addiere 2<br><br>
+
+    <strong>Aufgabe:</strong>
+    Welcher Wert entsteht am Ende?
+  `;
 
   const form = document.createElement("form");
   const label = document.createElement("label");
-  label.textContent = "Wert:";
-
+  label.textContent = "Endwert:";
   const input = document.createElement("input");
   input.type = "number";
   input.required = true;
@@ -347,23 +403,42 @@ function renderTuring(container, solved, fail) {
 
   form.addEventListener("submit", e => {
     e.preventDefault();
-    if (Number(input.value) === 16) {
-      container.insertAdjacentHTML("beforeend", `<div class="notice">Korrekt.</div>`);
+    const val = Number(input.value);
+
+    if (val === result) {
+      container.insertAdjacentHTML(
+        "beforeend",
+        `<div class="notice">Korrekt. Der Algorithmus endet bei ${result}.</div>`
+      );
       setTimeout(solved, 600);
     } else {
-      fail("Falsch.");
+      fail("Falsch. Gehe Schritt für Schritt vor.");
     }
   });
 }
 
 function renderHopper(container, solved, fail) {
+  const result = 14;
+
   const intro = document.createElement("p");
-  intro.innerHTML = `let x = 5;<br>x = x + 3;<br>x = x * 2;<br><br><strong>Endwert?</strong>`;
+  intro.innerHTML = `
+    USA, 1952. Grace Hopper überprüft einen Programmablauf.
+    Sie achtet auf Reihenfolge – jeder Befehl zählt.<br><br>
+
+    <strong>Code:</strong><br>
+    <code>
+      let x = 4;<br>
+      x = x * 3;<br>
+      x = x + 2;
+    </code><br><br>
+
+    <strong>Aufgabe:</strong>
+    Welchen Wert hat <em>x</em> am Ende?
+  `;
 
   const form = document.createElement("form");
   const label = document.createElement("label");
   label.textContent = "x =";
-
   const input = document.createElement("input");
   input.type = "number";
   input.required = true;
@@ -378,11 +453,16 @@ function renderHopper(container, solved, fail) {
 
   form.addEventListener("submit", e => {
     e.preventDefault();
-    if (Number(input.value) === 16) {
-      container.insertAdjacentHTML("beforeend", `<div class="notice">Richtig.</div>`);
+    const val = Number(input.value);
+
+    if (val === result) {
+      container.insertAdjacentHTML(
+        "beforeend",
+        `<div class="notice">Richtig. x endet bei ${result}.</div>`
+      );
       setTimeout(solved, 600);
     } else {
-      fail("Falsch.");
+      fail("Falsch. Achte genau auf die Reihenfolge der Operationen.");
     }
   });
 }
