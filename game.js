@@ -192,7 +192,8 @@ function onSolve() {
     localStorage.setItem("ts_solved", JSON.stringify(state.solved));
   }
 
-  if (!state.presentUnlocked) {
+  // Finale erst freischalten, wenn ALLE 5 Rätsel gelöst sind
+  if (state.solved.length === erasBase.length && !state.presentUnlocked) {
     state.presentUnlocked = true;
     localStorage.setItem("ts_present", JSON.stringify(true));
   }
