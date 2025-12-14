@@ -36,3 +36,56 @@ label{display:block;margin:.3rem 0}
 .special .actions{justify-content:flex-start}
 .special .actions .primary{background:linear-gradient(90deg,#5ad1ff,#77ffc4);color:#051321;border:none}
 @keyframes spin{to{transform:rotate(360deg)}}
+body[data-era="antike"] {
+  --bg: #2b1f14;
+  --card: #3a2a1a;
+  --border: #6b4f2a;
+  --accent: #e6c07b;
+  background: radial-gradient(120% 80% at 0% 0%, #5a4328 0%, #2b1f14 70%);
+}
+body[data-era="neuzeit"] {
+  --bg: #111827;
+  --card: #1f2937;
+  --border: #374151;
+  --accent: #93c5fd;
+  background: radial-gradient(120% 80% at 0% 0%, #1e3a8a 0%, #020617 70%);
+}
+body[data-era="moderne"] {
+  --bg: #0f172a;
+  --card: #1e293b;
+  --border: #334155;
+  --accent: #7dd3fc;
+  background: radial-gradient(120% 80% at 0% 0%, #164e63 0%, #020617 70%);
+}
+body[data-era="krieg"] {
+  --bg: #18181b;
+  --card: #27272a;
+  --border: #52525b;
+  --accent: #a3e635;
+  background: repeating-linear-gradient(135deg, #1c1c1c, #1c1c1c 20px, #111 20px, #111 40px);
+}
+body[data-era="digital"] {
+  --bg: #020617;
+  --card: #020617;
+  --border: #38bdf8;
+  --accent: #22d3ee;
+  background: linear-gradient(135deg, #020617, #020617),
+              repeating-linear-gradient(
+                90deg,
+                rgba(34,211,238,.15) 0,
+                rgba(34,211,238,.15) 1px,
+                transparent 1px,
+                transparent 20px
+              );
+}
+body[data-era="gegenwart"] {
+  --bg: #020617;
+  --card: #041025;
+  --border: #5ad1ff;
+  --accent: #77ffc4;
+  background: radial-gradient(
+    120% 80% at 50% 0%,
+    #0ea5e9 0%,
+    #020617 70%
+  );
+}

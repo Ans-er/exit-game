@@ -52,6 +52,15 @@ const erasBase = [
   }
 ];
 
+const eraThemes = {
+  pythagoras: "antike",
+  newton: "neuzeit",
+  curie: "moderne",
+  turing: "krieg",
+  hopper: "digital",
+  present: "gegenwart"
+};
+
 const elStart = document.getElementById("start");
 const elMenu = document.getElementById("menu");
 const elGrid = document.getElementById("era-grid");
@@ -175,6 +184,7 @@ function startEra(id) {
   if (!e || !e.playable) return;
 
   state.currentEra = id;
+  setTheme(id);
   elPuzzleTitle.textContent = `${e.era} • ${e.topic} (${e.year})`;
   elPuzzleFlavor.textContent = "";
   elPuzzleBody.innerHTML = "";
@@ -207,12 +217,26 @@ function onFail(msg) {
 }
 
 function showView(name) {
+  if (name === "menu" || name === "start" || name === "finale") {
+    clearTheme();
+  }
   elStart.hidden = name !== "start";
   elMenu.hidden = name !== "menu";
   elPuzzle.hidden = name !== "puzzle";
   elFinale.hidden = name !== "finale";
 
   if (name === "menu") renderMenu();
+}
+
+function setTheme(eraId) {
+  const theme = eraThemes[eraId];
+  if (theme) {
+    document.body.setAttribute("data-era", theme);
+  }
+}
+
+function clearTheme() {
+  document.body.removeAttribute("data-era");
 }
 
 /* ================= Rätsel ================= */
