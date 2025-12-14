@@ -284,7 +284,7 @@ function renderPythagoras(container, solved, fail) {
       );
       setTimeout(solved, 600);
     } else {
-      fail(`Falsch. Korrekt wäre etwa ${cRound.toFixed(1)}.`);
+      fail("Falsch. Überprüfe deine Rechnung nach dem Satz des Pythagoras.");
     }
   });
 }
@@ -335,7 +335,7 @@ function renderNewton(container, solved, fail) {
       );
       setTimeout(solved, 600);
     } else {
-      fail("Falsch. Nutze v = v₀ + a · t.");
+      fail("Falsch. Überprüfe die verwendete Formel.");
     }
   });
 }
@@ -385,7 +385,7 @@ function renderCurie(container, solved, fail) {
       );
       setTimeout(solved, 600);
     } else {
-      fail("Nicht korrekt. Multipliziere Moleküle × Atome pro Molekül.");
+      fail("Nicht korrekt. Schau dir nochmal die Anzahl Moleküle und Atome an.");
     }
   });
 }
