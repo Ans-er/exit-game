@@ -450,13 +450,13 @@ function renderTuring(container, solved, fail) {
       );
       setTimeout(solved, 600);
     } else {
-      fail("Falsch. Gehe Schritt für Schritt vor.");
+      fail("Falsch. Gehe Schritt für Schritt vor und achte auf die Reihenfolge der Sortierung, ist es aufsteigend oder absteigend.");
     }
   });
 }
 
 function renderHopper(container, solved, fail) {
-  const result = 120; // f(5)
+  const result = 120;
 
   const intro = document.createElement("p");
   intro.innerHTML = `
