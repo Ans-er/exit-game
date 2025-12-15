@@ -418,7 +418,7 @@ function renderTuring(container, solved, fail) {
     Du darfst immer nur zwei benachbarte Zahlen vertauschen. <br><br>
 
     <strong>Die Zahlenfolge:</strong><br>
-    Zahlenfolge = ${zahlenfolge.join(", ")}<br>
+    Zahlenfolge = ${numbers.join(", ")}<br>
     
     <strong>Aufgabe:</strong>
     Wie viele Schritte brauchst du mindestens um die Zahlenfolge zu sortieren
