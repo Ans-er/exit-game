@@ -242,52 +242,66 @@ function clearTheme() {
 /* ================= Rätsel ================= */
 
 function renderPythagoras(container, solved, fail) {
-  const a = 7;
-  const b = 5;
-  const cTrue = Math.sqrt(a * a + b * b);
-  const cRound = Math.round(cTrue * 10) / 10;
+  // Das bekannte 5-12-13 Dreieck
+  const sideA = 5;
+  const sideB = 12;
+  const hypotenuse = 13;
 
   const intro = document.createElement("p");
-  intro.innerHTML=`
+  intro.innerHTML = `
     <strong>Gegeben:</strong><br>
-    Antike Werkstatt, Wachstafel, rechtwinkliges Dreieck:
-    Das Dreieck hat ganzzahligen Seitenlängen, die längste Seite hat eine Länge von 13 Einheiten.
+    Antike Werkstatt, Wachstafel, rechtwinkliges Dreieck:<br>
+    Das Dreieck hat ganzzahlige Seitenlängen, die längste Seite hat eine Länge von 13 Einheiten.<br>
     Pythagoras will eine klare Rechnung – kurz, korrekt, überzeugend.<br><br>
-    <strong>Aufgabe:</strong>
-    Die Länge der beiden anderen Seiten
-    `;
-  const form = document.createElement("form");
-  const label = document.createElement("label");
-  label.textContent = "c =";
+    <strong>Aufgabe:</strong><br>
+    Gib die beiden anderen Seiten ein.
+  `;
 
-  const input = document.createElement("input");
-  input.type = "number";
-  input.step = "0.1";
-  input.required = true;
+  const form = document.createElement("form");
+
+  // Eingabe für Seite a
+  const labelA = document.createElement("label");
+  labelA.textContent = "Seite a =";
+  const inputA = document.createElement("input");
+  inputA.type = "number";
+  inputA.required = true;
+
+  // Eingabe für Seite b
+  const labelB = document.createElement("label");
+  labelB.textContent = "Seite b =";
+  const inputB = document.createElement("input");
+  inputB.type = "number";
+  inputB.required = true;
 
   const btn = document.createElement("button");
   btn.type = "submit";
   btn.className = "primary";
   btn.textContent = "Prüfen";
 
-  form.append(label, input, btn);
+  form.append(labelA, inputA, labelB, inputB, btn);
   container.append(intro, form);
 
   form.addEventListener("submit", e => {
     e.preventDefault();
-    const val = Number(input.value);
+    const valA = Number(inputA.value);
+    const valB = Number(inputB.value);
 
-    if (Math.abs(val - cRound) <= 0.05) {
+    // Beide Reihenfolgen prüfen, da a/b vertauschbar sein können
+    const correct =
+      (valA === sideA && valB === sideB) || (valA === sideB && valB === sideA);
+
+    if (correct) {
       container.insertAdjacentHTML(
         "beforeend",
-        `<div class="notice">Korrekt. c ≈ ${cRound.toFixed(1)}.</div>`
+        `<div class="notice">Korrekt. Die Seiten sind ${sideA} und ${sideB}.</div>`
       );
       setTimeout(solved, 600);
     } else {
-      fail("Falsch. Überprüfe deine Rechnung nach dem Satz des Pythagoras.");
+      fail("Falsch. Überprüfe nochmal die Ganzzahlseiten des rechtwinkligen Dreiecks.");
     }
   });
 }
+
 
 function renderNewton(container, solved, fail) {
   const v0 = 2;   // m/s
