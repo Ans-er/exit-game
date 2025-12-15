@@ -251,10 +251,10 @@ function renderPythagoras(container, solved, fail) {
   intro.innerHTML=`
     <strong>Gegeben:</strong><br>
     Antike Werkstatt, Wachstafel, rechtwinkliges Dreieck:
-    a = <strong>${a}</strong>, b = <strong>${b}</strong>.
+    Das Dreieck hat ganzzahligen Seitenlängen, die längste Seite hat eine Länge von 13 Einheiten.
     Pythagoras will eine klare Rechnung – kurz, korrekt, überzeugend.<br><br>
     <strong>Aufgabe:</strong>
-    Berechne die Hypotenuse <em>c</em> und runde auf eine Nachkommastelle.
+    Die Länge der beiden anderen Seiten
     `;
   const form = document.createElement("form");
   const label = document.createElement("label");
@@ -342,28 +342,29 @@ function renderNewton(container, solved, fail) {
 
 
 function renderCurie(container, solved, fail) {
-  const molecules = 3;
-  const atomsPer = 3; // H2O = 3 Atome
-  const totalAtoms = molecules * atomsPer;
+  const densityFactor = 0.5;
 
   const intro = document.createElement("p");
   intro.innerHTML = `
-    Paris, 1898. Marie Curie untersucht einfache Molekülmodelle.<br>
-    Sie erwartet eine klare Zählung – sachlich, exakt, nachvollziehbar.<br><br>
+    Paris, 1898. Marie Curie untersucht das Verhalten von Gasen.<br>
+    Sie erwartet klare, logische Berechnungen.<br><br>
 
     <strong>Gegeben:</strong><br>
-    Ein Wassermolekül H₂O besteht aus 3 Atomen.<br>
-    Anzahl der Moleküle: ${molecules}<br><br>
+    Ein ideales Gas füllt bei konstantem Druck 2 Liter.<br>
+    Das Volumen wird auf 4 Liter verdoppelt.<br><br>
 
-    <strong>Aufgabe:</strong>
-    Wie viele Atome sind es insgesamt?
+    <strong>Aufgabe:</strong><br>
+    Um wie viel mal ändert sich die Dichte des Gases?
+    (Gib den Faktor als Zahl ein, z.B. 0.5)
   `;
 
   const form = document.createElement("form");
   const label = document.createElement("label");
-  label.textContent = "Anzahl Atome:";
+  label.textContent = "Faktor der Dichteänderung:";
+
   const input = document.createElement("input");
   input.type = "number";
+  input.step = "0.01";
   input.required = true;
 
   const btn = document.createElement("button");
@@ -378,36 +379,35 @@ function renderCurie(container, solved, fail) {
     e.preventDefault();
     const val = Number(input.value);
 
-    if (val === totalAtoms) {
+    if (Math.abs(val - densityFactor) < 0.01) {
       container.insertAdjacentHTML(
         "beforeend",
-        `<div class="notice">Richtig. Insgesamt ${totalAtoms} Atome.</div>`
+        `<div class="notice">Richtig. Die Dichte halbiert sich.</div>`
       );
       setTimeout(solved, 600);
     } else {
-      fail("Nicht korrekt. Schau dir nochmal die Anzahl Moleküle und Atome an.");
+      fail("Falsch. Denke an die Formel Dichte = Masse / Volumen.");
     }
   });
 }
 
 
+
 function renderTuring(container, solved, fail) {
-  const start = 1;
-  const steps = 4;
-  const result = 9;
+  const numbers = [4, 1, 3, 2];
+  const steps = 2;
 
   const intro = document.createElement("p");
   intro.innerHTML = `
-    Großbritannien, 1943. Alan Turing denkt in klaren Abläufen.<br>
-    Jeder Schritt folgt einer festen Regel – ohne Interpretation.<br><br>
+    Großbritannien, 1943. Alan Turing hat eine Aufgabe für dich.<br>
+    Er will das du im hilfst eine Zahlenfolge zu sortieren.<br>
+    Du darfst immer nur zwei benachbarte Zahlen vertauschen. <br><br>
 
-    <strong>Algorithmus:</strong><br>
-    Startwert = ${start}<br>
-    Wiederhole ${steps}-mal:<br>
-    → addiere 2<br><br>
-
+    <strong>Die Zahlenfolge:</strong><br>
+    Zahlenfolge = ${zahlenfolge.join(", ")}<br>
+    
     <strong>Aufgabe:</strong>
-    Welcher Wert entsteht am Ende?
+    Wie viele Schritte brauchst du mindestens um die Zahlenfolge zu sortieren
   `;
 
   const form = document.createElement("form");
@@ -429,10 +429,10 @@ function renderTuring(container, solved, fail) {
     e.preventDefault();
     const val = Number(input.value);
 
-    if (val === result) {
+    if (val === steps) {
       container.insertAdjacentHTML(
         "beforeend",
-        `<div class="notice">Korrekt. Der Algorithmus endet bei ${result}.</div>`
+        `<div class="notice">Korrekt. Man braucht mindestens ${steps} Schritte um die Zahlenfolge zu sortieren.</div>`
       );
       setTimeout(solved, 600);
     } else {
@@ -442,27 +442,31 @@ function renderTuring(container, solved, fail) {
 }
 
 function renderHopper(container, solved, fail) {
-  const result = 14;
+  const result = 120; // f(5)
 
   const intro = document.createElement("p");
   intro.innerHTML = `
-    USA, 1952. Grace Hopper überprüft einen Programmablauf.<br>
-    Sie achtet auf Reihenfolge – jeder Befehl zählt.<br><br>
+    USA, 1952. Grace Hopper analysiert einen rekursiven Programmablauf.
+    Jeder Funktionsaufruf baut auf dem vorherigen auf – Schritt für Schritt.<br><br>
 
-    <strong>Code:</strong><br>
+    <strong>Pseudocode:</strong><br>
     <code>
-      let x = 4;<br>
-      x = x * 3;<br>
-      x = x + 2;
+      funktion f(n):<br>
+      &nbsp;&nbsp;wenn n == 1:<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;gib 1 zurück<br>
+      &nbsp;&nbsp;sonst:<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;gib n * f(n - 1) zurück
     </code><br><br>
 
-    <strong>Aufgabe:</strong>
-    Welchen Wert hat <em>x</em> am Ende?
+    <strong>Aufgabe:</strong><br>
+    Welchen Wert liefert <strong>f(5)</strong>?
   `;
 
   const form = document.createElement("form");
+
   const label = document.createElement("label");
-  label.textContent = "x =";
+  label.textContent = "Ergebnis von f(5):";
+
   const input = document.createElement("input");
   input.type = "number";
   input.required = true;
@@ -482,13 +486,14 @@ function renderHopper(container, solved, fail) {
     if (val === result) {
       container.insertAdjacentHTML(
         "beforeend",
-        `<div class="notice">Richtig. x endet bei ${result}.</div>`
+        `<div class="notice">Korrekt.</div>`
       );
       setTimeout(solved, 600);
     } else {
-      fail("Falsch. Achte genau auf die Reihenfolge der Operationen.");
+      fail("Falsch. Verfolge die Funktionsaufrufe Schritt für Schritt.");
     }
   });
 }
+
 
 function renderPresent() {}
