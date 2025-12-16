@@ -73,7 +73,6 @@ const elFinale = document.getElementById("finale");
 const elStatus = document.getElementById("status");
 const elReset = document.getElementById("reset");
 
-/* Navigation */
 document.getElementById("toMenu").addEventListener("click", () => showView("menu"));
 document.getElementById("backToStart").addEventListener("click", () => showView("start"));
 document.getElementById("backToMenu").addEventListener("click", () => showView("menu"));
@@ -202,7 +201,6 @@ function onSolve() {
     localStorage.setItem("ts_solved", JSON.stringify(state.solved));
   }
 
-  // Finale erst freischalten, wenn ALLE 5 Rätsel gelöst sind
   if (state.solved.length === erasBase.length && !state.presentUnlocked) {
     state.presentUnlocked = true;
     localStorage.setItem("ts_present", JSON.stringify(true));
@@ -242,7 +240,6 @@ function clearTheme() {
 /* ================= Rätsel ================= */
 
 function renderPythagoras(container, solved, fail) {
-  // Das bekannte 5-12-13 Dreieck
   const sideA = 5;
   const sideB = 12;
   const hypotenuse = 13;
@@ -259,14 +256,12 @@ function renderPythagoras(container, solved, fail) {
 
   const form = document.createElement("form");
 
-  // Eingabe für Seite a
   const labelA = document.createElement("label");
   labelA.textContent = "Seite a =";
   const inputA = document.createElement("input");
   inputA.type = "number";
   inputA.required = true;
 
-  // Eingabe für Seite b
   const labelB = document.createElement("label");
   labelB.textContent = "Seite b =";
   const inputB = document.createElement("input");
@@ -286,7 +281,6 @@ function renderPythagoras(container, solved, fail) {
     const valA = Number(inputA.value);
     const valB = Number(inputB.value);
 
-    // Beide Reihenfolgen prüfen, da a/b vertauschbar sein können
     const correct =
       (valA === sideA && valB === sideB) || (valA === sideB && valB === sideA);
 
@@ -304,55 +298,132 @@ function renderPythagoras(container, solved, fail) {
 
 
 function renderNewton(container, solved, fail) {
-  const v0 = 2;   // m/s
-  const a = 4;    // m/s²
-  const t = 3;    // s
-  const vTrue = v0 + a * t;
+  const questions = [
+    {
+      text: `
+        <strong>Frage 1:</strong><br>
+        Ein Körper bewegt sich mit konstanter Geschwindigkeit.<br><br>
+        <strong>Gegeben:</strong><br>
+        v = 5 m/s<br><br>
+        <strong>Frage:</strong><br>
+        Wie weit bewegt sich der Körper in 4 Sekunden?
+      `,
+      answers: ["9 m", "20 m", "25 m", "40 m"],
+      correct: 1
+    },
+    {
+      text: `
+        <strong>Frage 2:</strong><br>
+        Newton untersucht beschleunigte Bewegung.<br><br>
+        <strong>Gegeben:</strong><br>
+        a = 3 m/s²<br>
+        t = 2 s<br><br>
+        <strong>Frage:</strong><br>
+        Wie stark ändert sich die Geschwindigkeit?
+      `,
+      answers: ["3 m/s", "5 m/s", "6 m/s", "12 m/s"],
+      correct: 2
+    },
+    {
+      text: `
+        <strong>Frage 3:</strong><br>
+        <strong>Gegeben:</strong><br>
+        Anfangsgeschwindigkeit v₀ = 4 m/s<br>
+        Beschleunigung a = 2 m/s²<br>
+        Zeit t = 3 s<br><br>
+        <strong>Frage:</strong><br>
+        Wie groß ist die Endgeschwindigkeit?
+      `,
+      answers: ["6 m/s", "8 m/s", "10 m/s", "14 m/s"],
+      correct: 2
+    },
+    {
+      text: `
+        <strong>Frage 4:</strong><br>
+        Newtons zweites Gesetz lautet: F = m · a<br><br>
+        <strong>Gegeben:</strong><br>
+        m = 2 kg<br>
+        a = 5 m/s²<br><br>
+        <strong>Frage:</strong><br>
+        Wie groß ist die wirkende Kraft?
+      `,
+      answers: ["7 N", "10 N", "12 N", "15 N"],
+      correct: 1
+    }
+  ];
+
+  let current = 0;
 
   const intro = document.createElement("p");
   intro.innerHTML = `
-    England, 1666. Isaac Newton analysiert eine beschleunigte Bewegung.<br>
-    Newton fordert eine saubere Herleitung – logisch, präzise, überprüfbar.<br><br>
-
-    <strong>Gegeben:</strong><br>
-    Anfangsgeschwindigkeit v₀ = ${v0} m/s<br>
-    Beschleunigung a = ${a} m/s²<br>
-    Zeit t = ${t} s<br><br>
-
-    <strong>Aufgabe:</strong>
-    Berechne die Endgeschwindigkeit v.
+    England, 1666. Isaac Newton stellt dir mehrere Aufgaben.<br>
+    Jede baut auf der vorherigen auf – sauber, logisch, überprüfbar.
   `;
 
-  const form = document.createElement("form");
-  const label = document.createElement("label");
-  label.textContent = "v = (in m/s)";
-  const input = document.createElement("input");
-  input.type = "number";
-  input.required = true;
+  const questionBox = document.createElement("div");
+  const resultBox = document.createElement("div");
+  resultBox.className = "result";
 
-  const btn = document.createElement("button");
-  btn.type = "submit";
-  btn.className = "primary";
-  btn.textContent = "Prüfen";
+  container.append(intro, questionBox, resultBox);
 
-  form.append(label, input, btn);
-  container.append(intro, form);
+  function renderQuestion() {
+    resultBox.textContent = "";
+    questionBox.innerHTML = "";
 
-  form.addEventListener("submit", e => {
-    e.preventDefault();
-    const val = Number(input.value);
+    const q = questions[current];
 
-    if (val === vTrue) {
-      container.insertAdjacentHTML(
-        "beforeend",
-        `<div class="notice">Korrekt. v = ${vTrue} m/s.</div>`
+    const qText = document.createElement("p");
+    qText.innerHTML = q.text;
+    questionBox.appendChild(qText);
+
+    const form = document.createElement("form");
+
+    q.answers.forEach((ans, index) => {
+      const label = document.createElement("label");
+      label.style.display = "block";
+
+      const radio = document.createElement("input");
+      radio.type = "radio";
+      radio.name = "answer";
+      radio.value = index;
+      radio.required = true;
+
+      label.append(radio, " ", ans);
+      form.appendChild(label);
+    });
+
+    const btn = document.createElement("button");
+    btn.type = "submit";
+    btn.className = "primary";
+    btn.textContent = "Antwort prüfen";
+
+    form.appendChild(btn);
+    questionBox.appendChild(form);
+
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      const selected = Number(
+        form.querySelector("input[name='answer']:checked").value
       );
-      setTimeout(solved, 600);
-    } else {
-      fail("Falsch. Überprüfe die verwendete Formel.");
-    }
-  });
+
+      if (selected === q.correct) {
+        current++;
+        if (current < questions.length) {
+          renderQuestion();
+        } else {
+          resultBox.innerHTML =
+            `<div class="notice">Alle Aufgaben korrekt gelöst.</div>`;
+          setTimeout(solved, 800);
+        }
+      } else {
+        fail("Falsch. Überprüfe deine Rechnung und versuche es erneut.");
+      }
+    });
+  }
+
+  renderQuestion();
 }
+
 
 
 function renderCurie(container, solved, fail) {
