@@ -1,5 +1,8 @@
 :root{--bg:#0f1020;--fg:#f0f3ff;--muted:#aab;--card:#17182c;--border:#2a2c4a;--accent:#ffd166}
 *{box-sizing:border-box}
+html, body {
+  min-height: 100%;
+}
 body{
   margin:0;
   background:radial-gradient(120% 80% at 0% 0%,#1a1c3d 0%,#0f1020 70%);
@@ -58,7 +61,6 @@ body[data-era="neuzeit"] {
   --card: #1f2937;
   --border: #374151;
   --accent: #93c5fd;
-  background: radial-gradient(120% 80% at 0% 0%, #1e3a8a 0%, #020617 70%);
   background-image: 
     url("./images/neuzeit.jpg")
 
@@ -68,7 +70,6 @@ body[data-era="moderne"] {
   --card: #1e293b;
   --border: #334155;
   --accent: #7dd3fc;
-  background: radial-gradient(120% 80% at 0% 0%, #164e63 0%, #020617 70%);
   background-image: 
     url("./images/moderne.jpg")
 }
@@ -77,7 +78,6 @@ body[data-era="krieg"] {
   --card: #27272a;
   --border: #52525b;
   --accent: #a3e635;
-  background: repeating-linear-gradient(135deg, #1c1c1c, #1c1c1c 20px, #111 20px, #111 40px);
   background-image: 
     url("./images/krieg.jpg")
 }
@@ -86,14 +86,6 @@ body[data-era="digital"] {
   --card: #020617;
   --border: #38bdf8;
   --accent: #22d3ee;
-  background: linear-gradient(135deg, #020617, #020617),
-              repeating-linear-gradient(
-                90deg,
-                rgba(34,211,238,.15) 0,
-                rgba(34,211,238,.15) 1px,
-                transparent 1px,
-                transparent 20px
-              );
   background-image: 
     url("./images/digital.jpg")            
 }
