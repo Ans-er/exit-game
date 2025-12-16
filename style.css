@@ -45,10 +45,10 @@ body[data-era="antike"] {
   --card: #3a2a1a;
   --border: #6b4f2a;
   --accent: #e6c07b;
-  background: radial-gradient(120% 80% at 0% 0%, #5a4328 0%, #2b1f14 70%);
-  background-image:
+  background: 
     linear-gradient(rgba(43,31,20,.85), rgba(43,31,20,.85)),
-    url("images/antike.png");
+    url("assets/bg/antike.jpg"),
+    radial-gradient(120% 80% at 0% 0%, #1a1c3d 0%, #0f1020 70%);
 }
 body[data-era="neuzeit"] {
   --bg: #111827;
