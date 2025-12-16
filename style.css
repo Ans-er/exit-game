@@ -43,9 +43,12 @@ label{display:block;margin:.3rem 0}
 .special .actions .primary{background:linear-gradient(90deg,#5ad1ff,#77ffc4);color:#051321;border:none}
 @keyframes spin{to{transform:rotate(360deg)}}
 body[data-era="antike"] {
-  background-image: url("images/antike.png");
-  background-size: cover;
-  background-position: center;
+  --bg: #2b1f14;
+  --card: #3a2a1a;
+  --border: #6b4f2a;
+  --accent: #e6c07b;
+  background-image: 
+    url("/EXIT-GAME/images/antike.png")
 }
 body[data-era="neuzeit"] {
   --bg: #111827;
