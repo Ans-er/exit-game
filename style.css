@@ -1,9 +1,15 @@
 :root{--bg:#0f1020;--fg:#f0f3ff;--muted:#aab;--card:#17182c;--border:#2a2c4a;--accent:#ffd166}
 *{box-sizing:border-box}
-body{margin:0;
+body{
+  margin:0;
   background:radial-gradient(120% 80% at 0% 0%,#1a1c3d 0%,#0f1020 70%);
   color:var(--fg);
-  font:16px/1.55 system-ui,Segoe UI,Roboto,Helvetica,Arial}
+  font:16px/1.55 system-ui,Segoe UI,Roboto,Helvetica,Arial;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 .topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--border);position:sticky;top:0;backdrop-filter:blur(4px);gap:12px}
 .topbar h1{margin:0;font-size:20px}
 .controls{display:flex;align-items:center;gap:10px}
