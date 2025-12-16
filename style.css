@@ -49,7 +49,7 @@ body[data-era="antike"] {
   --accent: #e6c07b;
   background: 
     linear-gradient(rgba(43,31,20,.85), rgba(43,31,20,.85)),
-    url("./images/antike.png"),
+    url("/EXIT-GAME/images/antike.png"),
     radial-gradient(120% 80% at 0% 0%, #1a1c3d 0%, #0f1020 70%);
 }
 body[data-era="neuzeit"] {
