@@ -296,7 +296,6 @@ function renderPythagoras(container, solved, fail) {
   });
 }
 
-
 function renderNewton(container, solved, fail) {
   const questions = [
     {
@@ -423,59 +422,116 @@ function renderNewton(container, solved, fail) {
   renderQuestion();
 }
 
-
-
-
 function renderCurie(container, solved, fail) {
-  const densityFactor = 0.5;
+  const questions = [
+    {
+      text: `
+        <strong>Frage 1:</strong><br>
+        Ein ideales Gas wird bei konstantem Druck auf das doppelte Volumen gebracht.<br><br>
+        <strong>Aussage:</strong><br>
+        Die Dichte des Gases halbiert sich.
+      `,
+      correct: true
+    },
+    {
+      text: `
+        <strong>Frage 2:</strong><br>
+        <strong>Aussage:</strong><br>
+        Wenn sich das Volumen eines Gases verdoppelt, verdoppelt sich auch seine Masse.
+      `,
+      correct: false
+    },
+    {
+      text: `
+        <strong>Frage 3:</strong><br>
+        <strong>Aussage:</strong><br>
+        Die Dichte eines Stoffes berechnet man aus Masse geteilt durch Volumen.
+      `,
+      correct: true
+    },
+    {
+      text: `
+        <strong>Frage 4:</strong><br>
+        <strong>Aussage:</strong><br>
+        Bei konstantem Druck und konstanter Masse nimmt die Dichte eines Gases zu,
+        wenn das Volumen größer wird.
+      `,
+      correct: false
+    }
+  ];
+
+  let current = 0;
 
   const intro = document.createElement("p");
   intro.innerHTML = `
-    Paris, 1898. Marie Curie untersucht das Verhalten von Gasen.<br>
-    Sie erwartet klare, logische Berechnungen.<br><br>
-
-    <strong>Gegeben:</strong><br>
-    Ein ideales Gas füllt bei konstantem Druck 2 Liter.<br>
-    Das Volumen wird auf 4 Liter verdoppelt.<br><br>
-
-    <strong>Aufgabe:</strong><br>
-    Um wie viel mal ändert sich die Dichte des Gases?
-    (Gib den Faktor als Zahl ein, z.B. 0.5)
+    Paris, 1898. Marie Curie prüft dein Verständnis von Gasen.<br>
+    Jede Aussage muss korrekt bewertet werden – sachlich, logisch, präzise.
   `;
 
-  const form = document.createElement("form");
-  const label = document.createElement("label");
-  label.textContent = "Faktor der Dichteänderung:";
+  const questionBox = document.createElement("div");
+  const feedbackBox = document.createElement("div");
+  feedbackBox.className = "feedback";
 
-  const input = document.createElement("input");
-  input.type = "number";
-  input.step = "0.01";
-  input.required = true;
+  container.append(intro, questionBox, feedbackBox);
 
-  const btn = document.createElement("button");
-  btn.type = "submit";
-  btn.className = "primary";
-  btn.textContent = "Prüfen";
+  function renderQuestion() {
+    questionBox.innerHTML = "";
+    feedbackBox.textContent = "";
 
-  form.append(label, input, btn);
-  container.append(intro, form);
+    const q = questions[current];
 
-  form.addEventListener("submit", e => {
-    e.preventDefault();
-    const val = Number(input.value);
+    const qText = document.createElement("p");
+    qText.innerHTML = q.text;
+    questionBox.appendChild(qText);
 
-    if (Math.abs(val - densityFactor) < 0.01) {
-      container.insertAdjacentHTML(
-        "beforeend",
-        `<div class="notice">Richtig. Die Dichte halbiert sich.</div>`
-      );
-      setTimeout(solved, 600);
-    } else {
-      fail("Falsch. Denke an die Formel Dichte = Masse / Volumen.");
-    }
-  });
+    const form = document.createElement("form");
+
+    ["Wahr", "Falsch"].forEach((labelText, index) => {
+      const label = document.createElement("label");
+      label.style.display = "block";
+
+      const radio = document.createElement("input");
+      radio.type = "radio";
+      radio.name = "answer";
+      radio.value = index === 0; // Wahr = true, Falsch = false
+      radio.required = true;
+
+      label.append(radio, " ", labelText);
+      form.appendChild(label);
+    });
+
+    const btn = document.createElement("button");
+    btn.type = "submit";
+    btn.className = "primary";
+    btn.textContent = "Antwort prüfen";
+
+    form.appendChild(btn);
+    questionBox.appendChild(form);
+
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+
+      const selected =
+        form.querySelector("input[name='answer']:checked").value === "true";
+
+      if (selected === q.correct) {
+        current++;
+        if (current < questions.length) {
+          renderQuestion();
+        } else {
+          feedbackBox.innerHTML =
+            `<div class="notice">Alle chemischen Aussagen korrekt bewertet.</div>`;
+          setTimeout(solved, 800);
+        }
+      } else {
+        feedbackBox.textContent =
+          "Falsch. Überprüfe die Aussage noch einmal sorgfältig.";
+      }
+    });
+  }
+
+  renderQuestion();
 }
-
 
 
 function renderTuring(container, solved, fail) {
@@ -579,6 +635,5 @@ function renderHopper(container, solved, fail) {
     }
   });
 }
-
 
 function renderPresent() {}
