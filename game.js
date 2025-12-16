@@ -302,7 +302,6 @@ function renderNewton(container, solved, fail) {
     {
       text: `
         <strong>Frage 1:</strong><br>
-        Ein Körper bewegt sich mit konstanter Geschwindigkeit.<br><br>
         <strong>Gegeben:</strong><br>
         v = 5 m/s<br><br>
         <strong>Frage:</strong><br>
@@ -314,7 +313,6 @@ function renderNewton(container, solved, fail) {
     {
       text: `
         <strong>Frage 2:</strong><br>
-        Newton untersucht beschleunigte Bewegung.<br><br>
         <strong>Gegeben:</strong><br>
         a = 3 m/s²<br>
         t = 2 s<br><br>
@@ -328,9 +326,9 @@ function renderNewton(container, solved, fail) {
       text: `
         <strong>Frage 3:</strong><br>
         <strong>Gegeben:</strong><br>
-        Anfangsgeschwindigkeit v₀ = 4 m/s<br>
-        Beschleunigung a = 2 m/s²<br>
-        Zeit t = 3 s<br><br>
+        v₀ = 4 m/s<br>
+        a = 2 m/s²<br>
+        t = 3 s<br><br>
         <strong>Frage:</strong><br>
         Wie groß ist die Endgeschwindigkeit?
       `,
@@ -340,7 +338,6 @@ function renderNewton(container, solved, fail) {
     {
       text: `
         <strong>Frage 4:</strong><br>
-        Newtons zweites Gesetz lautet: F = m · a<br><br>
         <strong>Gegeben:</strong><br>
         m = 2 kg<br>
         a = 5 m/s²<br><br>
@@ -356,19 +353,19 @@ function renderNewton(container, solved, fail) {
 
   const intro = document.createElement("p");
   intro.innerHTML = `
-    England, 1666. Isaac Newton stellt dir mehrere Aufgaben.<br>
-    Jede baut auf der vorherigen auf – sauber, logisch, überprüfbar.
+    England, 1666. Isaac Newton prüft dein Verständnis der Bewegungsgesetze.<br>
+    Jede Aufgabe muss korrekt gelöst werden, bevor du weiterkommst.
   `;
 
   const questionBox = document.createElement("div");
-  const resultBox = document.createElement("div");
-  resultBox.className = "result";
+  const feedbackBox = document.createElement("div");
+  feedbackBox.className = "feedback";
 
-  container.append(intro, questionBox, resultBox);
+  container.append(intro, questionBox, feedbackBox);
 
   function renderQuestion() {
-    resultBox.textContent = "";
     questionBox.innerHTML = "";
+    feedbackBox.textContent = "";
 
     const q = questions[current];
 
@@ -402,6 +399,7 @@ function renderNewton(container, solved, fail) {
 
     form.addEventListener("submit", e => {
       e.preventDefault();
+
       const selected = Number(
         form.querySelector("input[name='answer']:checked").value
       );
@@ -411,18 +409,20 @@ function renderNewton(container, solved, fail) {
         if (current < questions.length) {
           renderQuestion();
         } else {
-          resultBox.innerHTML =
+          feedbackBox.innerHTML =
             `<div class="notice">Alle Aufgaben korrekt gelöst.</div>`;
           setTimeout(solved, 800);
         }
       } else {
-        fail("Falsch. Überprüfe deine Rechnung und versuche es erneut.");
+        feedbackBox.textContent =
+          "Falsch. Überprüfe deine Rechnung und versuche es erneut.";
       }
     });
   }
 
   renderQuestion();
 }
+
 
 
 
