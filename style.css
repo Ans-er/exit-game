@@ -48,7 +48,7 @@ body[data-era="antike"] {
   --border: #6b4f2a;
   --accent: #e6c07b;
   background-image: 
-    url("./images/digital.jpg")
+    url("./images/antike.jpg")
 }
 body[data-era="neuzeit"] {
   --bg: #111827;
@@ -56,6 +56,9 @@ body[data-era="neuzeit"] {
   --border: #374151;
   --accent: #93c5fd;
   background: radial-gradient(120% 80% at 0% 0%, #1e3a8a 0%, #020617 70%);
+  background-image: 
+    url("./images/neuzeit.jpg")
+
 }
 body[data-era="moderne"] {
   --bg: #0f172a;
@@ -63,6 +66,8 @@ body[data-era="moderne"] {
   --border: #334155;
   --accent: #7dd3fc;
   background: radial-gradient(120% 80% at 0% 0%, #164e63 0%, #020617 70%);
+  background-image: 
+    url("./images/moderne.jpg")
 }
 body[data-era="krieg"] {
   --bg: #18181b;
@@ -70,6 +75,8 @@ body[data-era="krieg"] {
   --border: #52525b;
   --accent: #a3e635;
   background: repeating-linear-gradient(135deg, #1c1c1c, #1c1c1c 20px, #111 20px, #111 40px);
+  background-image: 
+    url("./images/krieg.jpg")
 }
 body[data-era="digital"] {
   --bg: #020617;
@@ -84,6 +91,8 @@ body[data-era="digital"] {
                 transparent 1px,
                 transparent 20px
               );
+  background-image: 
+    url("./images/digital.jpg")            
 }
 body[data-era="gegenwart"] {
   --bg: #020617;
