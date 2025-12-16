@@ -1,5 +1,16 @@
 :root{--bg:#0f1020;--fg:#f0f3ff;--muted:#aab;--card:#17182c;--border:#2a2c4a;--accent:#ffd166}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(120% 80% at 0% 0%,#1a1c3d 0%,#0f1020 70%);color:var(--fg);font:16px/1.55 system-ui,Segoe UI,Roboto,Helvetica,Arial}
+*{box-sizing:border-box}
+
+body{margin:0;
+  margin:0;
+  color:var(--fg);
+  font:16px/1.55 system-ui,Segoe UI,Roboto,Helvetica,Arial;
+
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  transition: background-image .6s ease, background-color .6s ease;}
+
 .topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--border);position:sticky;top:0;backdrop-filter:blur(4px);gap:12px}
 .topbar h1{margin:0;font-size:20px}
 .controls{display:flex;align-items:center;gap:10px}
@@ -36,12 +47,16 @@ label{display:block;margin:.3rem 0}
 .special .actions{justify-content:flex-start}
 .special .actions .primary{background:linear-gradient(90deg,#5ad1ff,#77ffc4);color:#051321;border:none}
 @keyframes spin{to{transform:rotate(360deg)}}
+
 body[data-era="antike"] {
   --bg: #2b1f14;
   --card: #3a2a1a;
   --border: #6b4f2a;
   --accent: #e6c07b;
   background: radial-gradient(120% 80% at 0% 0%, #5a4328 0%, #2b1f14 70%);
+  background-image:
+    linear-gradient(rgba(43,31,20,.85), rgba(43,31,20,.85)),
+    url("images/antike.png");
 }
 body[data-era="neuzeit"] {
   --bg: #111827;
