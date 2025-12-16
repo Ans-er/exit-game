@@ -74,12 +74,17 @@ Viel Erfolg auf deiner Zeitreise!
 
 2. **Physik**
 
-   * v = 14 m/s
+   * Frage 1: 20 m/s
+   * Frage 2: 6 m/s
+   * Frage 3: 10 m/s
+   * Frage 4: 10N
 
 3. **Chemie**
 
-   * 0,5
-
+   * Frage 1: Wahr
+   * Frage 2: Falsch
+   * Frage 3: Wahr
+   * Frage 4: Falsch
 4. **Informatik**
 
    * 2 Schritte
