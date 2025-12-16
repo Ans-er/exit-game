@@ -48,7 +48,7 @@ body[data-era="antike"] {
   --border: #6b4f2a;
   --accent: #e6c07b;
   background-image: 
-    url("./images/antike.png")
+    url("./images/digital.jpg")
 }
 body[data-era="neuzeit"] {
   --bg: #111827;
