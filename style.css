@@ -5,9 +5,6 @@ body{
   background:radial-gradient(120% 80% at 0% 0%,#1a1c3d 0%,#0f1020 70%);
   color:var(--fg);
   font:16px/1.55 system-ui,Segoe UI,Roboto,Helvetica,Arial;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 .topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--border);position:sticky;top:0;backdrop-filter:blur(4px);gap:12px}
 .topbar h1{margin:0;font-size:20px}
@@ -52,7 +49,7 @@ body[data-era="antike"] {
   --accent: #e6c07b;
   background: 
     linear-gradient(rgba(43,31,20,.85), rgba(43,31,20,.85)),
-    url("/EXIT-GAME/images/antike.png")
+    url("./images/antike.png"),
     radial-gradient(120% 80% at 0% 0%, #1a1c3d 0%, #0f1020 70%);
 }
 body[data-era="neuzeit"] {
