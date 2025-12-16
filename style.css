@@ -48,7 +48,7 @@ body[data-era="antike"] {
   --border: #6b4f2a;
   --accent: #e6c07b;
   background-image: 
-    url("/EXIT-GAME/images/antike.png")
+    url("./images/antike.png")
 }
 body[data-era="neuzeit"] {
   --bg: #111827;
