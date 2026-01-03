@@ -583,57 +583,71 @@ function renderTuring(container, solved, fail) {
 }
 
 function renderHopper(container, solved, fail) {
-  const result = 120;
-
-  const intro = document.createElement("p");
-  intro.innerHTML = `
-    USA, 1952. Grace Hopper analysiert einen rekursiven Programmablauf.
-    Jeder Funktionsaufruf baut auf dem vorherigen auf – Schritt für Schritt.<br><br>
-
-    <strong>Pseudocode:</strong><br>
-    <code>
-      funktion f(n):<br>
-      &nbsp;&nbsp;wenn n == 1:<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;gib 1 zurück<br>
-      &nbsp;&nbsp;sonst:<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;gib n * f(n - 1) zurück
-    </code><br><br>
-
-    <strong>Aufgabe:</strong><br>
-    Welchen Wert liefert <strong>f(5)</strong>?
-  `;
-
-  const form = document.createElement("form");
-
-  const label = document.createElement("label");
-  label.textContent = "Ergebnis von f(5):";
-
-  const input = document.createElement("input");
-  input.type = "number";
-  input.required = true;
-
-  const btn = document.createElement("button");
-  btn.type = "submit";
-  btn.className = "primary";
-  btn.textContent = "Prüfen";
-
-  form.append(label, input, btn);
-  container.append(intro, form);
-
-  form.addEventListener("submit", e => {
-    e.preventDefault();
-    const val = Number(input.value);
-
-    if (val === result) {
-      container.insertAdjacentHTML(
-        "beforeend",
-        `<div class="notice">Korrekt.</div>`
-      );
-      setTimeout(solved, 600);
-    } else {
-      fail("Falsch. Verfolge die Funktionsaufrufe Schritt für Schritt.");
+  const tasks = [
+    {
+      text: `
+        f(n): wenn n == 1 → 1, sonst n · f(n−1)<br><br>
+        <strong>Aufgabe:</strong> f(5)
+      `,
+      result: 120
+    },
+    {
+      text: `
+        let x = 1;<br>
+        wiederhole 4-mal: x = x + 3;<br><br>
+        <strong>Aufgabe:</strong> Endwert von x?
+      `,
+      result: 13
+    },
+    {
+      text: `
+        let x = 10;<br>
+        x = x / 2;<br>
+        x = x + 5;<br><br>
+        <strong>Aufgabe:</strong> Endwert von x?
+      `,
+      result: 10
     }
-  });
+  ];
+
+  let current = 0;
+  const box = document.createElement("div");
+  container.appendChild(box);
+
+  function renderTask() {
+    box.innerHTML = "";
+    const t = tasks[current];
+
+    const p = document.createElement("p");
+    p.innerHTML = t.text;
+
+    const form = document.createElement("form");
+    const input = document.createElement("input");
+    input.type = "number";
+    input.required = true;
+
+    const btn = document.createElement("button");
+    btn.className = "primary";
+    btn.textContent = "Prüfen";
+
+    form.append(input, btn);
+    box.append(p, form);
+
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      Number(input.value) === t.result
+        ? next()
+        : fail("Falsch. Verfolge den Ablauf genau.");
+    });
+  }
+
+  function next() {
+    current++;
+    current < tasks.length ? renderTask() : solved();
+  }
+
+  renderTask();
 }
+
 
 function renderPresent() {}
