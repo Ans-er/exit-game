@@ -593,7 +593,7 @@ function renderTuring(container, solved, fail) {
   const tasks = [
     {
       text: `
-        Zahlenfolge = ${numbers.join(", ")}<br>
+        Zahlenfolge: [4, 1, 3, 2],<br>
         Du darfst nur benachbarte Zahlen tauschen.<br><br>
         <strong>Aufgabe:</strong>
         Wie viele Schritte brauchst du mindestens um die Zahlenfolge zu sortieren
