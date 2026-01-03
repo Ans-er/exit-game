@@ -163,14 +163,9 @@ function renderMenu() {
     if (e.playable) {
       btn.textContent = e.special ? "Beenden" : (solved ? "Nochmal" : "Start");
       btn.className = e.special ? "primary" : "";
-     btn.addEventListener("click", () => {
-        if (e.special) {
-          setTheme("present");
-          showView("finale");
-        } else {
-          startEra(e.id);
-        }
-      });
+      btn.addEventListener("click", () =>
+        e.special ? showView("finale") : startEra(e.id)
+      );
     } else {
       btn.textContent = "In Entwicklung";
       btn.disabled = true;
