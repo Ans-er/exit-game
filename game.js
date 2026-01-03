@@ -586,13 +586,23 @@ function renderHopper(container, solved, fail) {
   const tasks = [
     {
       text: `
-        f(n): wenn n == 1 → 1, sonst n · f(n−1)<br><br>
-        <strong>Aufgabe:</strong> f(5)
+        <strong>Pseudocode:</strong><br>
+        <code>
+          funktion f(n):<br>
+          &nbsp;&nbsp;wenn n == 1:<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;gib 1 zurück<br>
+          &nbsp;&nbsp;sonst:<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;gib n * f(n - 1) zurück
+        </code><br><br>
+
+        <strong>Aufgabe:</strong><br>
+        Welchen Wert liefert <strong>f(5)</strong>?
       `,
       result: 120
     },
     {
       text: `
+        <strong>Pseudocode:</strong><br>
         let x = 1;<br>
         wiederhole 4-mal: x = x + 3;<br><br>
         <strong>Aufgabe:</strong> Endwert von x?
@@ -601,6 +611,7 @@ function renderHopper(container, solved, fail) {
     },
     {
       text: `
+        <strong>Pseudocode:</strong><br>
         let x = 10;<br>
         x = x / 2;<br>
         x = x + 5;<br><br>
@@ -615,7 +626,10 @@ function renderHopper(container, solved, fail) {
   container.appendChild(box);
 
   function renderTask() {
-    box.innerHTML = "";
+    box.innerHTML = `
+    USA, 1952. Grace Hopper analysiert einen rekursiven Programmablauf.
+    Jeder Funktionsaufruf baut auf dem vorherigen auf – Schritt für Schritt.<br><br>
+  `;
     const t = tasks[current];
 
     const p = document.createElement("p");
