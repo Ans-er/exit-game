@@ -240,61 +240,116 @@ function clearTheme() {
 /* ================= Rätsel ================= */
 
 function renderPythagoras(container, solved, fail) {
-  const sideA = 5;
-  const sideB = 12;
-  const hypotenuse = 13;
-
-  const intro = document.createElement("p");
-  intro.innerHTML = `
-    <strong>Gegeben:</strong><br>
-    Antike Werkstatt, Wachstafel, rechtwinkliges Dreieck:<br>
-    Das Dreieck hat ganzzahlige Seitenlängen, die längste Seite hat eine Länge von 13 Einheiten.<br>
-    Pythagoras will eine klare Rechnung – kurz, korrekt, überzeugend.<br><br>
-    <strong>Aufgabe:</strong><br>
-    Gib die beiden anderen Seiten ein.
-  `;
-
-  const form = document.createElement("form");
-
-  const labelA = document.createElement("label");
-  labelA.textContent = "Seite a =";
-  const inputA = document.createElement("input");
-  inputA.type = "number";
-  inputA.required = true;
-
-  const labelB = document.createElement("label");
-  labelB.textContent = "Seite b =";
-  const inputB = document.createElement("input");
-  inputB.type = "number";
-  inputB.required = true;
-
-  const btn = document.createElement("button");
-  btn.type = "submit";
-  btn.className = "primary";
-  btn.textContent = "Prüfen";
-
-  form.append(labelA, inputA, labelB, inputB, btn);
-  container.append(intro, form);
-
-  form.addEventListener("submit", e => {
-    e.preventDefault();
-    const valA = Number(inputA.value);
-    const valB = Number(inputB.value);
-
-    const correct =
-      (valA === sideA && valB === sideB) || (valA === sideB && valB === sideA);
-
-    if (correct) {
-      container.insertAdjacentHTML(
-        "beforeend",
-        `<div class="notice">Korrekt. Die Seiten sind ${sideA} und ${sideB}.</div>`
-      );
-      setTimeout(solved, 600);
-    } else {
-      fail("Falsch. Überprüfe nochmal die Ganzzahlseiten des rechtwinkligen Dreiecks.");
+  const tasks = [
+    {
+      text: `
+        Rechtwinkliges Dreieck mit ganzzahligen Seiten.<br>
+        Die Hypotenuse ist 13 Einheiten lang.<br><br>
+        <strong>Aufgabe:</strong> Gib die beiden anderen Seiten ein.
+      `,
+      type: "two",
+      a: 5,
+      b: 12
+    },
+    {
+      text: `
+        Ein rechtwinkliges Dreieck hat die Hypotenuse 10 und eine Kathete 6.<br><br>
+        <strong>Aufgabe:</strong> Wie lang ist die andere Kathete?
+      `,
+      type: "one",
+      result: 8
+    },
+    {
+      text: `
+        Ein Dreieck hat die Seiten 9, 12 und 15.<br><br>
+        <strong>Aufgabe:</strong>
+        Ist das Dreieck rechtwinklig? (1 = ja, 0 = nein)
+      `,
+      type: "check",
+      result: 1
     }
-  });
+  ];
+
+  let current = 0;
+  const box = document.createElement("div");
+  container.appendChild(box);
+
+  function renderTask() {
+    box.innerHTML =  `
+      Du bist in der Antike gelandet und musst Pythagoras mit ein paar mathematischen Problemen helfen
+    `;
+    const t = tasks[current];
+
+    const p = document.createElement("p");
+    p.innerHTML = t.text;
+    box.appendChild(p);
+
+    const form = document.createElement("form");
+
+    if (t.type === "two") {
+      const a = document.createElement("input");
+      const b = document.createElement("input");
+      a.type = b.type = "number";
+      a.placeholder = "Seite a";
+      b.placeholder = "Seite b";
+      a.required = b.required = true;
+      form.append(a, b);
+
+      form.addEventListener("submit", e => {
+        e.preventDefault();
+        const va = Number(a.value);
+        const vb = Number(b.value);
+        const ok =
+          (va === t.a && vb === t.b) ||
+          (va === t.b && vb === t.a);
+        ok ? next() : fail("Falsch. Prüfe den Satz des Pythagoras.");
+      });
+    }
+
+    if (t.type === "one") {
+      const input = document.createElement("input");
+      input.type = "number";
+      input.required = true;
+      form.append(input);
+
+      form.addEventListener("submit", e => {
+        e.preventDefault();
+        Number(input.value) === t.result
+          ? next()
+          : fail("Falsch. Berechne die fehlende Kathete.");
+      });
+    }
+
+    if (t.type === "check") {
+      const input = document.createElement("input");
+      input.type = "number";
+      input.required = true;
+      form.append(input);
+
+      form.addEventListener("submit", e => {
+        e.preventDefault();
+        Number(input.value) === t.result
+          ? next()
+          : fail("Falsch. Prüfe a² + b² = c².");
+      });
+    }
+
+    const btn = document.createElement("button");
+    btn.className = "primary";
+    btn.textContent = "Prüfen";
+    form.appendChild(btn);
+
+    box.appendChild(form);
+  }
+
+  function next() {
+    current++;
+    current < tasks.length ? renderTask() : solved();
+  }
+
+  renderTask();
 }
+
 
 function renderNewton(container, solved, fail) {
   const questions = [
@@ -493,7 +548,7 @@ function renderCurie(container, solved, fail) {
       const radio = document.createElement("input");
       radio.type = "radio";
       radio.name = "answer";
-      radio.value = index === 0; // Wahr = true, Falsch = false
+      radio.value = index === 0;
       radio.required = true;
 
       label.append(radio, " ", labelText);
