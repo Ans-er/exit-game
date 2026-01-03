@@ -535,52 +535,75 @@ function renderCurie(container, solved, fail) {
 
 
 function renderTuring(container, solved, fail) {
-  const numbers = [4, 1, 3, 2];
-  const steps = 2;
-
-  const intro = document.createElement("p");
-  intro.innerHTML = `
-    Großbritannien, 1943. Alan Turing hat eine Aufgabe für dich.<br>
-    Er will das du im hilfst eine Zahlenfolge zu sortieren.<br>
-    Du darfst immer nur zwei benachbarte Zahlen vertauschen. <br><br>
-
-    <strong>Die Zahlenfolge:</strong><br>
-    Zahlenfolge = ${numbers.join(", ")}<br>
-    
-    <strong>Aufgabe:</strong>
-    Wie viele Schritte brauchst du mindestens um die Zahlenfolge zu sortieren
-  `;
-
-  const form = document.createElement("form");
-  const label = document.createElement("label");
-  label.textContent = "Endwert:";
-  const input = document.createElement("input");
-  input.type = "number";
-  input.required = true;
-
-  const btn = document.createElement("button");
-  btn.type = "submit";
-  btn.className = "primary";
-  btn.textContent = "Prüfen";
-
-  form.append(label, input, btn);
-  container.append(intro, form);
-
-  form.addEventListener("submit", e => {
-    e.preventDefault();
-    const val = Number(input.value);
-
-    if (val === steps) {
-      container.insertAdjacentHTML(
-        "beforeend",
-        `<div class="notice">Korrekt. Man braucht mindestens ${steps} Schritte um die Zahlenfolge zu sortieren.</div>`
-      );
-      setTimeout(solved, 600);
-    } else {
-      fail("Falsch. Gehe Schritt für Schritt vor und achte auf die Reihenfolge der Sortierung, ist es aufsteigend oder absteigend.");
+  const tasks = [
+    {
+      text: `
+        Zahlenfolge = ${numbers.join(", ")}<br>
+        Du darfst nur benachbarte Zahlen tauschen.<br><br>
+        <strong>Aufgabe:</strong>
+        Wie viele Schritte brauchst du mindestens um die Zahlenfolge zu sortieren
+      `,
+      result: 2
+    },
+    {
+      text: `
+        Startwert = 2<br>
+        Wiederhole 3-mal: Wert = Wert · 2<br><br>
+        <strong>Aufgabe:</strong> Was kommt als Endwert raus?
+      `,
+      result: 16
+    },
+    {
+      text: `
+        Ein Algorithmus benötigt pro Schleifendurchlauf 1 Sekunde.<br>
+        Die Schleife läuft 5-mal.<br><br>
+        <strong>Aufgabe:</strong> Was ist die Gesamtdauer die der Algorithmus braucht in Sekunden?
+      `,
+      result: 5
     }
-  });
+  ];
+
+  let current = 0;
+  const box = document.createElement("div");
+  container.appendChild(box);
+
+  function renderTask() {
+    box.innerHTML = `
+      Großbritannien, 1943. Alan Turing hat eine Aufgabe für dich.<br>
+    `;
+    const t = tasks[current];
+
+    const p = document.createElement("p");
+    p.innerHTML = t.text;
+
+    const form = document.createElement("form");
+    const input = document.createElement("input");
+    input.type = "number";
+    input.required = true;
+
+    const btn = document.createElement("button");
+    btn.className = "primary";
+    btn.textContent = "Prüfen";
+
+    form.append(input, btn);
+    box.append(p, form);
+
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      Number(input.value) === t.result
+        ? next()
+        : fail("Falsch. Gehe Schritt für Schritt vor.");
+    });
+  }
+
+  function next() {
+    current++;
+    current < tasks.length ? renderTask() : solved();
+  }
+
+  renderTask();
 }
+
 
 function renderHopper(container, solved, fail) {
   const tasks = [
