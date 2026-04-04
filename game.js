@@ -742,4 +742,95 @@ function renderHopper(container, solved, fail) {
 }
 
 
-function renderPresent() {}
+function renderPresent(container, solved, fail) {
+  const tasks = [
+    {
+      text: `
+        <strong>Finale – Aufgabe 1:</strong><br><br>
+        Du hast auf deiner Reise viele Zahlen gesehen.<br>
+        Kombiniere dein Wissen:<br><br>
+
+        Gegeben:<br>
+        a = 3, b = 4<br><br>
+
+        <strong>Aufgabe:</strong><br>
+        Berechne die Hypotenuse (Satz des Pythagoras).
+      `,
+      result: 5
+    },
+    {
+      text: `
+        <strong>Finale – Aufgabe 2:</strong><br><br>
+        Ein Wert startet bei 1.<br>
+        Wiederhole 8-mal:<br>
+        → Wert = Wert * 2<br><br>
+
+        <strong>Aufgabe:</strong><br>
+        Was ist der Endwert?
+      `,
+      result: 256
+    },
+    {
+      text: `
+        <strong>Finale – Aufgabe 3:</strong><br><br>
+        Gegeben:<br>
+        m = 3 kg<br>
+        a = 4 m/s²<br><br>
+
+        <strong>Aufgabe:</strong><br>
+        Berechne die Kraft.
+      `,
+      result: 12
+    }
+  ];
+
+  let current = 0;
+  const box = document.createElement("div");
+  container.appendChild(box);
+
+  function renderTask() {
+    box.innerHTML = `
+      <strong>Gegenwart:</strong><br>
+      Die Zeitmaschine ist fast stabil… aber ein letzter Test fehlt.<br>
+      Nutze dein gesamtes Wissen aus der Reise.<br><br>
+    `;
+
+    const t = tasks[current];
+
+    const p = document.createElement("p");
+    p.innerHTML = t.text;
+
+    const form = document.createElement("form");
+    const input = document.createElement("input");
+    input.type = "number";
+    input.required = true;
+
+    const btn = document.createElement("button");
+    btn.className = "primary";
+    btn.textContent = "Prüfen";
+
+    form.append(input, btn);
+    box.append(p, form);
+
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+
+      if (Number(input.value) === t.result) {
+        next();
+      } else {
+        fail("Falsch. Nutze dein Wissen aus allen Epochen.");
+      }
+    });
+  }
+
+  function next() {
+    current++;
+    if (current < tasks.length) {
+      renderTask();
+    } else {
+      solved();
+    }
+  }
+
+  renderTask();
+}
