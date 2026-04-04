@@ -137,3 +137,13 @@ Viel Erfolg auf deiner Zeitreise!
 **Aufgabe 3:**  
 → 10  
 
+## 6. Sonderziel Gegenwart
+
+**Aufgabe 1:**
+→ 5 
+
+**Aufgabe 2:**
+→ 256 
+
+**Aufgabe 3:**
+→ 12 
