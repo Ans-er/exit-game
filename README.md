@@ -68,31 +68,72 @@ Viel Erfolg auf deiner Zeitreise!
 
 # Lösungen für alle Rätsel
 
-1. **Geometrie**
+## 1. Geometrie (Pythagoras)
 
-   * a = 5, b = 12 oder a = 12 und b = 5
+**Aufgabe 1:**  
+→ a = 5, b = 12 *(oder umgekehrt)*  
 
-2. **Physik**
+**Aufgabe 2:**  
+→ 8  
 
-   * Frage 1: 20 m/s
-   * Frage 2: 6 m/s
-   * Frage 3: 10 m/s
-   * Frage 4: 10N
+**Aufgabe 3:**  
+→ 1 *(Ja, rechtwinklig)*  
 
-3. **Chemie**
+---
 
-   * Frage 1: Wahr
-   * Frage 2: Falsch
-   * Frage 3: Wahr
-   * Frage 4: Falsch
-   
-4. **Informatik**
+## 2. Physik (Newton)
 
-   * 2 Schritte
+**Frage 1:**  
+→ 20 m  
 
-5. **Programmierlogik**
+**Frage 2:**  
+→ 6 m/s  
 
-   * 120
+**Frage 3:**  
+→ 10 m/s  
 
+**Frage 4:**  
+→ 10 N  
 
+---
+
+## 3. Chemie (Curie)
+
+**Frage 1:**  
+→ Wahr  
+
+**Frage 2:**  
+→ Falsch  
+
+**Frage 3:**  
+→ Wahr  
+
+**Frage 4:**  
+→ Falsch  
+
+---
+
+## 4. Informatik (Turing)
+
+**Aufgabe 1:**  
+→ 2  
+
+**Aufgabe 2:**  
+→ 16  
+
+**Aufgabe 3:**  
+→ 5  
+
+---
+
+## 5. Programmierlogik (Hopper)
+
+**Aufgabe 1:**  
+→ 120  
+
+**Aufgabe 2:**  
+→ 13  
+
+**Aufgabe 3:**  
+→ 10  
 
