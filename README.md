@@ -140,10 +140,16 @@ Viel Erfolg auf deiner Zeitreise!
 ## 6. Sonderziel Gegenwart
 
 **Aufgabe 1:**
-→ 5 
+→ 17 
 
 **Aufgabe 2:**
-→ 256 
+→ 12 
 
 **Aufgabe 3:**
-→ 12 
+→ 5 
+
+**Aufgabe 4:**
+→ 9
+
+**Aufgabe 5:**
+→ 128

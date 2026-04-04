@@ -750,41 +750,54 @@ function renderPresent(container, solved, fail) {
   const tasks = [
     {
       text: `
-        <strong>Finale – Aufgabe 1:</strong><br><br>
-        Du hast auf deiner Reise viele Zahlen gesehen.<br>
-        Kombiniere dein Wissen:<br><br>
-
-        Gegeben:<br>
-        a = 3, b = 4<br><br>
-
+        <strong>Finale – Pythagoras:</strong><br><br>
+        Ein rechtwinkliges Dreieck hat die Katheten 8 und 15.<br><br>
         <strong>Aufgabe:</strong><br>
-        Berechne die Hypotenuse (Satz des Pythagoras).
+        Wie lang ist die Hypotenuse?
+      `,
+      result: 17
+    },
+    {
+      text: `
+        <strong>Finale – Newton:</strong><br><br>
+        Gegeben:<br>
+        m = 4 kg<br>
+        a = 3 m/s²<br><br>
+        <strong>Aufgabe:</strong><br>
+        Berechne die Kraft.
+      `,
+      result: 12
+    },
+    {
+      text: `
+        <strong>Finale – Curie:</strong><br><br>
+        Ein Stoff hat die Masse 10 kg und ein Volumen von 2 m³.<br><br>
+        <strong>Aufgabe:</strong><br>
+        Berechne die Dichte (ρ = m / V).
       `,
       result: 5
     },
     {
       text: `
-        <strong>Finale – Aufgabe 2:</strong><br><br>
-        Ein Wert startet bei 1.<br>
-        Wiederhole 8-mal:<br>
-        → Wert = Wert * 2<br><br>
-
+        <strong>Finale – Turing:</strong><br><br>
+        Startwert = 3<br>
+        Wiederhole 3-mal:<br>
+        → Wert = Wert + 2<br><br>
         <strong>Aufgabe:</strong><br>
         Was ist der Endwert?
       `,
-      result: 256
+      result: 9
     },
     {
       text: `
-        <strong>Finale – Aufgabe 3:</strong><br><br>
-        Gegeben:<br>
-        m = 3 kg<br>
-        a = 4 m/s²<br><br>
-
+        <strong>Finale – Hopper:</strong><br><br>
+        <strong>Pseudocode:</strong><br>
+        let x = 2;<br>
+        wiederhole 6-mal: x = x * 2;<br><br>
         <strong>Aufgabe:</strong><br>
-        Berechne die Kraft.
+        Endwert von x?
       `,
-      result: 12
+      result: 128
     }
   ];
 
@@ -795,8 +808,8 @@ function renderPresent(container, solved, fail) {
   function renderTask() {
     box.innerHTML = `
       <strong>Gegenwart:</strong><br>
-      Die Zeitmaschine ist fast stabil… aber ein letzter Test fehlt.<br>
-      Nutze dein gesamtes Wissen aus der Reise.<br><br>
+      Die Zeitlinien stabilisieren sich – aber nur, wenn du dein gesamtes Wissen korrekt anwendest.<br>
+      Jede Epoche hinterlässt eine letzte Prüfung.<br><br>
     `;
 
     const t = tasks[current];
@@ -822,7 +835,7 @@ function renderPresent(container, solved, fail) {
       if (Number(input.value) === t.result) {
         next();
       } else {
-        fail("Falsch. Nutze dein Wissen aus allen Epochen.");
+        fail("Falsch. Denk an die jeweilige Epoche.");
       }
     });
   }
