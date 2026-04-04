@@ -137,6 +137,8 @@ Viel Erfolg auf deiner Zeitreise!
 **Aufgabe 3:**  
 → 10  
 
+---
+
 ## 6. Sonderziel Gegenwart
 
 **Aufgabe 1:**
