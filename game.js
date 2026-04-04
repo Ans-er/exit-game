@@ -161,11 +161,9 @@ function renderMenu() {
     const btn = document.createElement("button");
 
     if (e.playable) {
-      btn.textContent = e.special ? "Beenden" : (solved ? "Nochmal" : "Start");
+      btn.textContent = e.special ? "Finale starten" : (solved ? "Nochmal" : "Start");
       btn.className = e.special ? "primary" : "";
-      btn.addEventListener("click", () =>
-        e.special ? showView("finale") : startEra(e.id)
-      );
+      btn.addEventListener("click", () => startEra(e.id));
     } else {
       btn.textContent = "In Entwicklung";
       btn.disabled = true;
@@ -196,7 +194,13 @@ function startEra(id) {
 function onSolve() {
   const id = state.currentEra;
 
-  if (!state.solved.includes(id) && id !== "present") {
+  // Wenn Gegenwart abgeschlossen → direkt Finale
+  if (id === "present") {
+    showView("finale");
+    return;
+  }
+
+  if (!state.solved.includes(id)) {
     state.solved.push(id);
     localStorage.setItem("ts_solved", JSON.stringify(state.solved));
   }
